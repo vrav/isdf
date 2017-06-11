@@ -47,7 +47,7 @@ func sdfCompute(bitMask *image.Gray, spread, downscale float64) *image.Gray16 {
       centerX := math.Floor(x * downscale + downscale * 2.0)
       centerY := math.Floor(y * downscale + downscale * 2.0)
       
-      signedDistance := findSignedDistance(bitMask, centerX, centerY, spread)
+      signedDistance := findSignedDistance(bitMask, bw, bh, centerX, centerY, spread)
       
       alpha := 0.5 + 0.5 * (signedDistance / spread)
       alpha = math.Floor(math.Min(math.Max(0.0, alpha), 1.0) * 65535.0)
@@ -59,10 +59,7 @@ func sdfCompute(bitMask *image.Gray, spread, downscale float64) *image.Gray16 {
   return out
 }
 
-func findSignedDistance(bitMask *image.Gray, centerX, centerY, spread float64) float64 {
-  bb := bitMask.Bounds()
-  bw, bh := bb.Max.X, bb.Max.Y
-  
+func findSignedDistance(bitMask *image.Gray, bw, bh int, centerX, centerY, spread float64) float64 {
   base := bitMask.GrayAt(int(centerX), int(centerY))
   delta := math.Ceil(spread)
   startX := math.Max(0.0, centerX - delta)
