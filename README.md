@@ -1,6 +1,6 @@
 # isdf
 
-Single-function package which takes an input [image.Image](https://godoc.org/image#Image) and returns an [image.Gray16](https://godoc.org/image#Gray16) Signed Distance Field representation.
+Single-function package which takes an input [image.Image](https://godoc.org/image#Image) and returns an [image.Gray16](https://godoc.org/image#Gray16) Signed Distance Field representation. See example code for simple usage in a command line app.
 
 ![img1](http://i.imgur.com/bNI5Ujc.png)
 
