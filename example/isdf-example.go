@@ -13,6 +13,8 @@ import (
 
 var inFilename = flag.String("in", "in.png", "input image to process")
 var outFilename = flag.String("out", "out.png", "output file to save to")
+var spread = flag.Float64("spread", 32.0, "spread of distance field")
+var downscale = flag.Float64("scale", 4.0, "image downscaling; 2 = half size")
 
 func main() {
   flag.Parse()
@@ -32,8 +34,7 @@ func main() {
   }
   
   // convert input image to Signed Distance Field representation
-  // spread by 32 pixels, downscale to 1/4 size
-  outImage := isdf.ImageToSDF(inImage, 32.0, 4.0)
+  outImage := isdf.ImageToSDF(inImage, *spread, *downscale)
   
   // create output file
   out, err := os.Create(*outFilename)
